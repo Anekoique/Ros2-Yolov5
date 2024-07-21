@@ -336,5 +336,4 @@ void Yolo::findMax(vector<Output> result, int size)
 			sprintf(coord, "%d,%d,%d", right_x, right_y, flag_servo);
 		}
 	}
-    }
 }
