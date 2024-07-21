@@ -15,7 +15,7 @@ using namespace cv;
 char coord[50];
 char coord_last_frame[50];
 int target_x = 317;
-int target_y = 323;
+int target_y = 338;
 int flag_servo = 0;
 int count_servo = 0;
 int count_nomove = 0;
