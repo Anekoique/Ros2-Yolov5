@@ -17,7 +17,6 @@ char coord_last_frame[50];
 int target_x = 317;
 int target_y = 338;
 int flag_servo = 0;
-int count_servo = 0;
 int count_nomove = 0;
 int model_flag = 0;
 string model_path = "/home/stoair/ros2CV/cv_ws/src/topic/src/models/best_H.onnx";
@@ -72,7 +71,6 @@ private:
     }
 
     void image_callback(const sensor_msgs::msg::Image::SharedPtr msg) {
-        last_message_time_ = this->get_clock()->now();
         message_received_ = true;
         RCLCPP_INFO(this->get_logger(), "Receiving video frames");
         Mat src;
@@ -87,7 +85,7 @@ private:
         cv::imshow("frame", img);
         waitKey(1);
 
-        drive_servo(coord, target_x, target_y, 15);
+        drive_servo(coord, target_x, target_y, 1);
         if (strcmp(coord, coord_last_frame) == 0) { // 如Z果连续多帧坐标相同，说明没有检测到目标，不再发送坐标数据
             count_nomove++;
             if (count_nomove >= 30)
@@ -103,8 +101,7 @@ private:
             time_t now = time(0);
             tm *ltm = localtime(&now);
             char timestamp[20];
-            sprintf(timestamp, "%04d-%02d-%02d_%02d:%02d:%02d", 1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday,
-                    ltm->tm_hour, ltm->tm_min, ltm->tm_sec);
+            sprintf(timestamp, "%04d-%02d-%02d_%02d:%02d:%02d", 1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday, ltm->tm_hour, ltm->tm_min, ltm->tm_sec);
             string videoFilename = "/home/stoair/Videos/" + string(timestamp) + ".avi";
             video.open(videoFilename, VideoWriter::fourcc('M', 'J', 'P', 'G'), 10, Size(img.cols, img.rows));
             if (!video.isOpened())
@@ -116,22 +113,6 @@ private:
         video.write(img);
     }
 
-    void check_message_timeout() {
-        if (!message_received_) {
-            return;
-        }
-
-        rclcpp::Time current_time = this->get_clock()->now();
-        if ((current_time - last_message_time_).seconds() >= 1.0) {
-            // 如果3秒内没有接收到新的消息，执行操作
-            RCLCPP_INFO(this->get_logger(), "No message received in the last 3 seconds. Executing operation.");
-
-            // 执行操作...
-            strcpy(coord, "0");
-            // 重置标志
-            message_received_ = false;
-        }
-    }
 
     Mat handle_image(Mat frame, Yolo& test)
     {
@@ -162,28 +143,33 @@ private:
     }
 
     void timer_callback() {
-        //check_message_timeout();
         ros2_interfaces::msg::Coord message;
         sscanf(coord, "%d,%d,%d", &message.x, &message.y, &message.flag_servo);
         publisher_->publish(message);
-        // RCLCPP_INFO(this->get_logger(), "publish coord");
     }
 
-    void drive_servo(char *str, int target_x, int target_y, int times) {
+    void drive_servo(char *str, int target_x, int target_y, double duration) {
         int x, y, r;
         int rmax = 20;
+        static bool start_timing = false;
         if (sscanf(str, "%d,%d", &x, &y) == 2) {
             r = calculateDistance(x, y, target_x, target_y);
 
             if (r <= rmax)
-                count_servo++;
+                if (start_timing == false) {
+                    start_timing = true;
+                    last_message_time_ = this->get_clock()->now();
+                    RCLCPP_INFO(this->get_logger(), "begin to timing");
+                } else {
+                    rclcpp::Time current_time = this->get_clock()->now();
+                    if ((current_time - last_message_time_).seconds() >= duration) {
+                        RCLCPP_INFO(this->get_logger(), "flag_servo has set to 1");
+                        flag_servo = 1;
+                    }
+                }
             else {
-                count_servo = 0;
+                start_timing = false;
                 flag_servo = 0;
-            }
-            cout << r << "|" << count_servo << endl;
-            if (count_servo >= times) {
-                flag_servo = 1;
             }
         }
     }
