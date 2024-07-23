@@ -20,8 +20,8 @@ int flag_servo = 0;
 int count_servo = 0;
 int count_nomove = 0;
 int model_flag = 0;
-string model_path = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/best_H.onnx";
-string model_path_circle = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/best.onnx";
+string model_path = "/home/stoair/ros2CV/cv_ws/src/topic/src/models/best_H.onnx";
+string model_path_circle = "/home/stoair/ros2CV/cv_ws/src/topic/src/models/lite_circle.onnx";
 Matrix3d K; // 内参矩阵
 Vector2d D; // 畸变矩阵
 
@@ -82,11 +82,12 @@ private:
         Mat img = handle_image(src, test);
         namedWindow("frame", WINDOW_NORMAL);
         cv::circle(img, cv::Point(target_x,target_y), 20, cv::Scalar(0,255,255), 2, cv::LINE_AA);// 黄色
-        imshow("frame", img);
-        resizeWindow("frame", 1040, 780);
+		resizeWindow("frame", 780, 500);
+		moveWindow("frame", 10000, 10000);
+        cv::imshow("frame", img);
         waitKey(1);
 
-        drive_servo(coord, target_x, target_y, 3);
+        drive_servo(coord, target_x, target_y, 15);
         if (strcmp(coord, coord_last_frame) == 0) { // 如Z果连续多帧坐标相同，说明没有检测到目标，不再发送坐标数据
             count_nomove++;
             if (count_nomove >= 30)
