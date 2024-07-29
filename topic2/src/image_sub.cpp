@@ -90,13 +90,25 @@ private:
         waitKey(1);
 
         drive_servo(coord, target_x, target_y, 1);
-        if (strcmp(coord, coord_last_frame) == 0 && target_flag == false) { // 如Z果连续多帧坐标相同，说明没有检测到目标，不再发送坐标数据
-            count_nomove++;
-            if (count_nomove >= 30)
-            {
-                strcpy(coord, "0");
-                count_nomove = 0;
+        if (target_flag == false) { 
+            if (strcmp(coord, coord_last_frame) == 0) {
+                count_nomove++;
+                if (count_nomove >= 30)
+                {
+                    strcpy(coord, "0");
+                    count_nomove = 0;
+                }
             }
+        } else {
+            if (strcmp(coord, coord_last_frame) == 0) {
+                count_nomove++;
+                if (count_nomove >= 150)
+                {
+                    strcpy(coord, "0");
+                    count_nomove = 0;
+                }
+            }
+
         }
         strcpy(coord_last_frame, coord);
 
