@@ -19,11 +19,8 @@ int count_nomove = 0;
 int model_flag = 0;
 Matrix3d K; // 内参矩阵
 Vector2d D; // 畸变矩阵
-std::string circle_engine_path = "../engine/circle.engine";
-std::string H_engine_path = "../engine/H.engine";
-
-static Logger gLogger;
-const static int kOutputSize = kMaxNumOutputBbox * sizeof(Detection) / sizeof(float) + 1;
+std::string circle_engine_path = "/home/stoair/ros2CV/cv_ws/src/trtDet/engine/circle.engine";
+std::string H_engine_path = "/home/stoair/ros2CV/cv_ws/src/trtDet/engine/H.engine";
 
 class imageSub : public rclcpp::Node
 {

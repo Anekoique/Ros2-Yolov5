@@ -1,0 +1,4 @@
+source;share/trtDet/local_setup.bash
+source;share/trtDet/local_setup.dsv
+source;share/trtDet/local_setup.sh
+source;share/trtDet/local_setup.zsh

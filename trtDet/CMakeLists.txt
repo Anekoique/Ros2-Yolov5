@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(TRT_DET)
+project(trtDet)
 
 add_definitions(-std=c++11)
 add_definitions(-DAPI_EXPORTS)
@@ -9,9 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CUDA_ARCHITECTURES 89)
 
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
+#if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+#  add_compile_options(-Wall -Wextra -Wpedantic)
+#endif()
 list(APPEND CMAKE_PREFIX_PATH /)
 
 set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.1/bin/nvcc)
@@ -33,18 +33,22 @@ link_directories(/usr/local/cuda-12.1/lib64)
 include_directories(/home/stoair/packages/TensorRT-10.2.0.19/include)
 link_directories(/home/stoair/packages/TensorRT-10.2.0.19/lib/)
 
-include_directories(${PROJECT_SOURCE_DIR}/src/)
-include_directories(${PROJECT_SOURCE_DIR}/plugin/)
+include_directories(${PROJECT_SOURCE_DIR}/include/)
+include_directories(/home/stoair/ros2CV/cv_ws/src/trtDet/plugin/)
 file(GLOB_RECURSE SRCS ${PROJECT_SOURCE_DIR}/src/*.cpp ${PROJECT_SOURCE_DIR}/src/*.cu)
-file(GLOB_RECURSE PLUGIN_SRCS ${PROJECT_SOURCE_DIR}/plugin/*.cu)
+file(GLOB_RECURSE PLUGIN_SRCS /home/stoair/ros2CV/cv_ws/src/trtDet/plugin/*.cu)
 
 add_definitions(-DAPI_EXPORTS)
 add_library(myplugins SHARED ${PLUGIN_SRCS})
 target_link_libraries(myplugins nvinfer cudart)
 
-add_executable(image_sub ${SRCS})
-ament_target_dependencies(image_sub rclcpp OpenCV cv_bridge ros2_interfaces sensor_msgs nvinfer cudart myplugins)
-add_executable(show src/showImage)
+add_executable(image_sub ./src/calibrator.cpp ./src/image_sub.cpp ./src/model.cpp ./src/postprocess.cpp 
+				./src/preprocess.cu ./src/trtInfer.cpp)
+ament_target_dependencies(image_sub rclcpp OpenCV cv_bridge ros2_interfaces sensor_msgs)
+target_link_libraries(image_sub nvinfer)
+target_link_libraries(image_sub cudart)
+target_link_libraries(image_sub myplugins)
+add_executable(show src/showImage.cpp)
 ament_target_dependencies(show rclcpp OpenCV cv_bridge sensor_msgs)
 install(TARGETS
   image_sub

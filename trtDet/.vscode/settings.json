@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/stoair/ros2CV/cv_ws/install/ros2_interfaces/local/lib/python3.10/dist-packages",
+        "/home/stoair/ros2CV/cv_ws/install/pyPublish/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/stoair/ros2CV/cv_ws/install/ros2_interfaces/local/lib/python3.10/dist-packages",
+        "/home/stoair/ros2CV/cv_ws/install/pyPublish/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

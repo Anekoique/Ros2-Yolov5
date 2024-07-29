@@ -2,9 +2,7 @@
 
 using namespace nvinfer1;
 
-TrtInfer::kOutputSize = kMaxNumOutputBbox * sizeof(Detection) / sizeof(float) + 1;
-
-void TrtInfer::init(const std::string& engine_file)
+void TrtInfer::init(std::string& engine_file)
 {
     this->engine_file = engine_file;
     this->runtime = nullptr;
@@ -90,7 +88,7 @@ void TrtInfer::infer(IExecutionContext& context, cudaStream_t& stream, void** gp
     cudaStreamSynchronize(stream);
 }
 
-Mat TrtInfer::trtInfer(std::Mat& img) {
+cv::Mat TrtInfer::trtInfer(cv::Mat& img) {
     // Preprocess
     cuda_preprocess(img.ptr(), img.cols, img.rows, gpu_buffers[0], kInputW, kInputH, stream);
     CUDA_CHECK(cudaStreamSynchronize(stream));

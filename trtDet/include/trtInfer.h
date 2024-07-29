@@ -11,26 +11,24 @@
 #include <chrono>
 #include <cmath>
 #include <iostream>
-
 using namespace nvinfer1;
-
+static Logger gLogger;
 class TrtInfer
 {
 public:
-    TrtInfer::TrtInfer(){};
+    TrtInfer(){};
     void init(std::string& engine_file);
     ~TrtInfer();
     cv::Mat trtInfer(cv::Mat& img);
 private:
     std::string engine_file;
-    Iruntime* runtime;
-    ICudaEngine* engine;
-    IExecutionContext* context;
+    nvinfer1::IRuntime* runtime;
+    nvinfer1::ICudaEngine* engine;
+    nvinfer1::IExecutionContext* context;
     cudaStream_t stream;
     float* gpu_buffers[2];
     float* cpu_output_buffer;
-    static Logger gLogger;
-    const static int kOutputSize;
+    const static int kOutputSize = kMaxNumOutputBbox * sizeof(Detection) / sizeof(float) + 1;;
     void prepare_buffers(ICudaEngine* engine, float** gpu_input_buffer, 
                          float** gpu_output_buffer,float** cpu_output_buffer);
     void infer(IExecutionContext& context, cudaStream_t& stream, void** gpu_buffers,
@@ -38,6 +36,6 @@ private:
     void deserialize_engine(std::string& engine_name, IRuntime** runtime, ICudaEngine** engine,
                             IExecutionContext** context);
 
-}
+};
 
 #endif // __TRTINFER_H__

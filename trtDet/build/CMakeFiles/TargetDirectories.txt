@@ -1,0 +1,12 @@
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/uninstall.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/trtDet_uninstall.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/myplugins.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/image_sub.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/show.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/test.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/edit_cache.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/rebuild_cache.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/list_install_components.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/install.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/install/local.dir
+/home/stoair/ros2CV/cv_ws/src/trtDet/build/CMakeFiles/install/strip.dir

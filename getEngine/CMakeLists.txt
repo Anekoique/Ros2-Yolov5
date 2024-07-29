@@ -8,6 +8,7 @@ option(CUDA_USE_STATIC_CUDA_RUNTIME OFF)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CUDA_ARCHITECTURES 89)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # TODO(Call for PR): make cmake compatible with Windows
 set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.1/bin/nvcc)

@@ -1,7 +1,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "cv_bridge/cv_bridge.h"
-#include <opencv2/opencv.hpp>
+#include "opencv2/opencv.hpp"
 #include <chrono>
 
 using namespace std;
@@ -31,11 +31,11 @@ private:
             new_buff[i] = buff[i];
         }
         Mat src = imdecode(Mat(1, datalen, CV_8UC1, new_buff), IMREAD_COLOR);
-		cv::namedWindow("camera", WINDOW_NORMAL);
-		cv::resizeWindow("camera", 780, 500);
-		cv::moveWindow("camera", 10000, 0);
+		namedWindow("camera", WINDOW_NORMAL);
+		resizeWindow("camera", 780, 500);
+		moveWindow("camera", 10000, 0);
 		cv::imshow("camera", src);
-		cv::waitKey(1);
+		waitKey(1);
 		
 	}
 };

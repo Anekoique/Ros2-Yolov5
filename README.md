@@ -1,5 +1,5 @@
 # ros2-yolov5
-Use Raspberry Pi with a camera to publish images, and use a local device to subscribe and perform DNN inference with acceleration.
+Use Raspberry Pi with a camera to publish images, and use a local device to subscribe and perform DNN/tensorRT inference with acceleration.
 
 --------
 
@@ -80,10 +80,6 @@ newgrp docker                      #更新用户组
 ```
 
 # TensorRT
-
-## onnx2engine
-
-- Makefile.config:
 
 ARCH parameters:https://developer.nvidia.cn/cuda-gpus#compute
 
