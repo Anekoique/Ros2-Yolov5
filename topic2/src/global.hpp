@@ -14,6 +14,5 @@ extern int target_y;
 extern int model_flag;
 extern Matrix3d K;
 extern Vector2d D;
-char *getUndistortedPixelCoord(double x, double y);
 
 #endif

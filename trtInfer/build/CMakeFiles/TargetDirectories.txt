@@ -1,0 +1,4 @@
+/home/stoair/ros2-yolov5/trtInfer/build/CMakeFiles/myplugins.dir
+/home/stoair/ros2-yolov5/trtInfer/build/CMakeFiles/trt_infer.dir
+/home/stoair/ros2-yolov5/trtInfer/build/CMakeFiles/edit_cache.dir
+/home/stoair/ros2-yolov5/trtInfer/build/CMakeFiles/rebuild_cache.dir

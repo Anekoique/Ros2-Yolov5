@@ -19,8 +19,8 @@ int target_y = 338;
 int flag_servo = 0;
 int count_nomove = 0;
 int model_flag = 0;
-string model_path = "/home/stoair/ros2CV/cv_ws/src/topic/src/models/best_H.onnx";
-string model_path_circle = "/home/stoair/ros2CV/cv_ws/src/topic/src/models/lite_circle.onnx";
+string model_path = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/best_H.onnx";
+string model_path_circle = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/lite_circle.onnx";
 Matrix3d K; // 内参矩阵
 Vector2d D; // 畸变矩阵
 
@@ -28,6 +28,9 @@ class imageSub : public rclcpp::Node
 {
 public:
     imageSub() : Node("webcam_sub") {
+        isFirstFrame = true;
+        target_flag = false;
+        
         std::cout << "OpenCV version: " << CV_VERSION << std::endl;
         readmodel();
 
@@ -54,10 +57,11 @@ private:
     Yolo test;
     dnn::Net net1, net2;
     vector<Output> result;
-    bool isFirstFrame = true;
+    bool isFirstFrame;
     VideoWriter video;
     rclcpp::Time last_message_time_;
     bool message_received_;
+    bool target_flag;
 
     void readmodel() {
         if (test.readModel(net1, model_path, USE_CUDA))
@@ -86,7 +90,7 @@ private:
         waitKey(1);
 
         drive_servo(coord, target_x, target_y, 1);
-        if (strcmp(coord, coord_last_frame) == 0) { // 如Z果连续多帧坐标相同，说明没有检测到目标，不再发送坐标数据
+        if (strcmp(coord, coord_last_frame) == 0 && target_flag == false) { // 如Z果连续多帧坐标相同，说明没有检测到目标，不再发送坐标数据
             count_nomove++;
             if (count_nomove >= 30)
             {
@@ -134,10 +138,12 @@ private:
         undistort(frame, img, K, D, K);
         if (test.Detect(img, net1, result, 1)) {
             img = test.drawPred(img, result, color, 1);
+            target_flag = true;
         }
         if (test.Detect(img, net2, result, 0)) {
             test.target(img, result, 0);
             img = test.drawPred(img, result, color, 0);
+            target_flag = false;
         }
         return img;
     }
