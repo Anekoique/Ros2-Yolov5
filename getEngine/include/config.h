@@ -10,7 +10,7 @@ constexpr static int kNumClass = 1;
 
 constexpr static int kBatchSize = 1;
 
-constexpr static int kInputH = 640;
+constexpr static int kInputH = 480;
 constexpr static int kInputW = 640;
 
 constexpr static int kMaxNumOutputBbox = 1000;

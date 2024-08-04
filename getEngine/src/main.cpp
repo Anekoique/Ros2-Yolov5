@@ -46,8 +46,8 @@ bool serialize_engine(unsigned int max_batchsize, std::string& wts_name,
 int main(int argc, char ** argv)
 {
 	cudaSetDevice(kGpuId);
-	std::string wts_name = "../modules/H.wts";
-	std::string engine_name = "../engine/H.engine";
+	std::string wts_name = "../modules/circle.wts";
+	std::string engine_name = "../engine/circle.engine";
 	float gd = 0.0f, gw = 0.0f;
 	gd = 0.33f;
     gw = 0.50f;
