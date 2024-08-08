@@ -1,4 +1,4 @@
-# Install script for directory: /home/stoair/ros2-yolov5/topic2
+# Install script for directory: /home/stoair/ros2CV/cv_ws/src/topic2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -49,7 +49,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/image_pub"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/topic2" TYPE EXECUTABLE FILES "/home/stoair/ros2-yolov5/topic2/build/image_pub")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/topic2" TYPE EXECUTABLE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/image_pub")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/image_pub" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/image_pub")
     file(RPATH_CHANGE
@@ -69,7 +69,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/image_sub"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/topic2" TYPE EXECUTABLE FILES "/home/stoair/ros2-yolov5/topic2/build/image_sub")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/topic2" TYPE EXECUTABLE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/image_sub")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/image_sub" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/image_sub")
     file(RPATH_CHANGE
@@ -83,31 +83,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show")
-    file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show"
-         RPATH "")
-  endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/topic2" TYPE EXECUTABLE FILES "/home/stoair/ros2-yolov5/topic2/build/show")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show")
-    file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show"
-         OLD_RPATH "/usr/local/cuda-12.1/lib64:/opt/ros2/humble/lib:/opt/ros/humble/lib:/usr/local/lib:"
-         NEW_RPATH "")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/topic2/show")
-    endif()
-  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/topic2")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/topic2")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/topic2")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/topic2")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -115,7 +95,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2/environment" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/ament_prefix_path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2/environment" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/ament_prefix_path.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -123,42 +103,42 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2/environment" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2/environment" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/path.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/local_setup.bash")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/local_setup.bash")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/local_setup.sh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/local_setup.sh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/local_setup.zsh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/local_setup.zsh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/local_setup.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/local_setup.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_environment_hooks/package.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_environment_hooks/package.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_index/share/ament_index/resource_index/packages/topic2")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_index/share/ament_index/resource_index/packages/topic2")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2/cmake" TYPE FILE FILES
-    "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_core/topic2Config.cmake"
-    "/home/stoair/ros2-yolov5/topic2/build/ament_cmake_core/topic2Config-version.cmake"
+    "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_core/topic2Config.cmake"
+    "/home/stoair/ros2CV/cv_ws/src/topic2/build/ament_cmake_core/topic2Config-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2-yolov5/topic2/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/topic2" TYPE FILE FILES "/home/stoair/ros2CV/cv_ws/src/topic2/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -169,5 +149,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/stoair/ros2-yolov5/topic2/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/stoair/ros2CV/cv_ws/src/topic2/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

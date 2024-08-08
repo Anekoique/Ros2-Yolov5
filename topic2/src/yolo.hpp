@@ -30,7 +30,7 @@ public:
 	bool Detect(cv::Mat& SrcImg, cv::dnn::Net& net, std::vector<Output>& output, int model_flag);
 	cv::Mat drawPred(cv::Mat img, std::vector<Output> result, std::vector<cv::Scalar> color, int model_flag);
 	void target(cv::Mat src, std::vector<Output> result, int model_flag);
-	void findMin(std::vector<Output> result, int size);
+	void findMin(std::vector<Output> result, int size, int model_flag);
 private:
 
 	float sigmoid_x(float x)

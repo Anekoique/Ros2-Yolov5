@@ -1,0 +1,12 @@
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/uninstall.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/topic_uninstall.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/image_pub.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/image_sub.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/show.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/test.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/edit_cache.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/rebuild_cache.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/list_install_components.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/install.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/install/local.dir
+/home/stoair/ros2CV/cv_ws/src/topic/build/CMakeFiles/install/strip.dir

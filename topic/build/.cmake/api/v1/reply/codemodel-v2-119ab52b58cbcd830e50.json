@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-b927f1dbf08959498783.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "topic",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "image_pub::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-image_pub-Debug-5e322ad5cc69c3a22b91.json",
+					"name" : "image_pub",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "image_sub::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-image_sub-Debug-75fe0eedc507d7b0a661.json",
+					"name" : "image_sub",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "show::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-show-Debug-e8d374b507efc74e9daa.json",
+					"name" : "show",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "topic_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-topic_uninstall-Debug-cac2c576229b9b6490a4.json",
+					"name" : "topic_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Debug-5aa82133676805d88451.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/stoair/ros2CV/cv_ws/src/topic/build",
+		"source" : "/home/stoair/ros2CV/cv_ws/src/topic"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

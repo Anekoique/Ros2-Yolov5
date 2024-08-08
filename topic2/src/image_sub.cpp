@@ -12,15 +12,18 @@ using namespace Eigen;
 using namespace std;
 using namespace cv;
 
-char coord[50];
-char coord_last_frame[50];
-int target_x = 317;
-int target_y = 338;
+char cir_coord[50];
+char H_coord[50];
+char cir_last_frame[50];
+char H_last_frame[50];
+double target_x = 317;
+double target_y = 338;
 int flag_servo = 0;
-int count_nomove = 0;
+int cir_count = 0;
+int H_count = 0;
 int model_flag = 0;
-string model_path = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/best_H.onnx";
-string model_path_circle = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/lite_circle.onnx";
+string model_path = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/best_H_0802.onnx";
+string model_path_circle = "/home/stoair/ros2CV/cv_ws/src/topic2/src/models/best_circle_0802.onnx";
 Matrix3d K; // 内参矩阵
 Vector2d D; // 畸变矩阵
 
@@ -29,7 +32,6 @@ class imageSub : public rclcpp::Node
 public:
     imageSub() : Node("webcam_sub") {
         isFirstFrame = true;
-        target_flag = false;
         
         std::cout << "OpenCV version: " << CV_VERSION << std::endl;
         readmodel();
@@ -61,7 +63,6 @@ private:
     VideoWriter video;
     rclcpp::Time last_message_time_;
     bool message_received_;
-    bool target_flag;
 
     void readmodel() {
         if (test.readModel(net1, model_path, USE_CUDA))
@@ -80,7 +81,7 @@ private:
         Mat src;
         std::string base64 = std::string((msg->data).begin(), (msg->data).end()); 
         Mat2Img::Base2Mat(base64, src);
-
+        //cv::imshow("frame", src);
         Mat img = handle_image(src, test);
         namedWindow("frame", WINDOW_NORMAL);
         cv::circle(img, cv::Point(target_x,target_y), 20, cv::Scalar(0,255,255), 2, cv::LINE_AA);// 黄色
@@ -89,28 +90,27 @@ private:
         cv::imshow("frame", img);
         waitKey(1);
 
-        drive_servo(coord, target_x, target_y, 1);
-        if (target_flag == false) { 
-            if (strcmp(coord, coord_last_frame) == 0) {
-                count_nomove++;
-                if (count_nomove >= 30)
-                {
-                    strcpy(coord, "0");
-                    count_nomove = 0;
-                }
+		drive_servo(cir_coord, target_x, target_y, 1);
+        if (strcmp(cir_coord, cir_last_frame) == 0) { 
+            cir_count++;
+            if (cir_count >= 30)
+            {
+                strcpy(cir_coord, "0");
+                cir_count = 0;
             }
-        } else {
-            if (strcmp(coord, coord_last_frame) == 0) {
-                count_nomove++;
-                if (count_nomove >= 150)
-                {
-                    strcpy(coord, "0");
-                    count_nomove = 0;
-                }
-            }
-
         }
-        strcpy(coord_last_frame, coord);
+        if (strcmp(H_coord, H_last_frame) == 0) { 
+            H_count++;
+            if (H_count >= 150)
+            {
+                strcpy(H_coord, "0");
+                H_count = 0;
+            }
+        }
+        
+        strcpy(cir_last_frame, cir_coord);
+        strcpy(H_last_frame, H_coord);
+
 
         if (isFirstFrame)
         {
@@ -146,31 +146,31 @@ private:
             color.push_back(Scalar(b, g, r));
         }
 
-        Mat img;
+        Mat cir_img, H_img, img;
         undistort(frame, img, K, D, K);
         if (test.Detect(img, net1, result, 1)) {
             img = test.drawPred(img, result, color, 1);
-            target_flag = true;
         }
         if (test.Detect(img, net2, result, 0)) {
             test.target(img, result, 0);
             img = test.drawPred(img, result, color, 0);
-            target_flag = false;
         }
         return img;
     }
 
     void timer_callback() {
         ros2_interfaces::msg::Coord message;
-        sscanf(coord, "%d,%d,%d", &message.x, &message.y, &message.flag_servo);
+        sscanf(cir_coord, "%f,%f,%d", &message.x1, &message.y1, &message.flag_servo);
+        sscanf(H_coord, "%f, %f", &message.x2, &message.y2);
+        RCLCPP_INFO(this->get_logger(), "Publishing Coord, %f, %f, %f, %f, %d", message.x1, message.y1, message.x2, message.y2, message.flag_servo);
         publisher_->publish(message);
     }
 
-    void drive_servo(char *str, int target_x, int target_y, double duration) {
-        int x, y, r;
-        int rmax = 20;
+    void drive_servo(char *str, double target_x, double target_y, double duration) {
+        float x, y, r;
+        float rmax = 20;
         static bool start_timing = false;
-        if (sscanf(str, "%d,%d", &x, &y) == 2) {
+        if (sscanf(str, "%f,%f", &x, &y) == 2) {
             r = calculateDistance(x, y, target_x, target_y);
 
             if (r <= rmax)
@@ -204,7 +204,8 @@ private:
 
 int main(int argc, char ** argv)
 {
-    coord[0] = '0';
+    cir_coord[0] = '0';
+    H_coord[0] = '0';
     rclcpp::init(argc, argv);
     auto node = std::make_shared<imageSub>();
     rclcpp::spin(node);
@@ -212,3 +213,4 @@ int main(int argc, char ** argv)
     return 0;
 
 }
+

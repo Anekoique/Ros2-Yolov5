@@ -2,7 +2,6 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "cv_bridge/cv_bridge.h"
-#include "ros2_interfaces/msg/coord.hpp"
 #include "Mat2image.hpp"
 
 using namespace cv;
@@ -21,11 +20,6 @@ public:
             std::bind(&imagePub::timer_callback, this)
         );
 
-        subscriber_ = this->create_subscription<ros2_interfaces::msg::Coord>(
-            "coord", 
-            10, 
-            std::bind(&imagePub::coord_callback, this, std::placeholders::_1)
-        );
         cap.open(0, CAP_V4L2);
         cap.set(CAP_PROP_FOURCC, VideoWriter::fourcc('M','J','P','G'));
         cap.set(CAP_PROP_FRAME_WIDTH, 640);
@@ -33,7 +27,6 @@ public:
     }
 private:
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr publisher_;
-    rclcpp::Subscription<ros2_interfaces::msg::Coord>::SharedPtr subscriber_;
     rclcpp::TimerBase::SharedPtr timer_;
     VideoCapture cap;
     int jpeg_quality_ = 95;
@@ -57,14 +50,6 @@ private:
         }
     }
 
-    void coord_callback(const ros2_interfaces::msg::Coord::SharedPtr msg)
-    {
-        int x = msg->x;
-        int y = msg->y;
-        int flag = msg->flag_servo;
-        RCLCPP_INFO(this->get_logger(), "收到坐标(%d, %d), flag_servo = %d", x, y, flag);
-    }
-    
 };
 
 int main(int argc, char ** argv)

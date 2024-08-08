@@ -7,10 +7,11 @@
 
 using namespace Eigen;
 
-extern char coord[50];
+extern char cir_coord[50];
+extern char H_coord[50];
 extern int flag_servo;
-extern int target_x;
-extern int target_y;
+extern double target_x;
+extern double target_y;
 extern int model_flag;
 extern Matrix3d K;
 extern Vector2d D;

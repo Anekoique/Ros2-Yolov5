@@ -240,7 +240,7 @@ Mat Yolo::drawPred(Mat src, vector<Output> result, vector<Scalar> color, int mod
 		int center_x = left[i] + (result[i].box.width / 2);
 		int center_y = top[i] + (result[i].box.height / 2);
 	}
-	findMax(result, result.size());
+	findMax(result, result.size(), model_flag);
 	//int left_x = left[left_max] + result[left_max].box.width/2, left_y = top[left_max] + result[left_max].box.height/2;
 	//int up_x = left[up_max] + result[up_max].box.width/2, up_y = top[up_max] + result[up_max].box.height/2;
 	//int down_x = left[down_max] + result[down_max].box.width/2, down_y = top[down_max] + result[down_max].box.height/2;
@@ -295,8 +295,9 @@ void Yolo::target(Mat src, vector<Output> result, int model_flag)
 	// return dst[0];
 }
 
-void Yolo::findMax(vector<Output> result, int size)
+void Yolo::findMax(vector<Output> result, int size, int model_flag)
 {
+	char coord[50];
 	if (size == 0) return;
 	else if (size == 1)
 	{
@@ -309,12 +310,12 @@ void Yolo::findMax(vector<Output> result, int size)
 		int b = result[1].box.width * result[1].box.height;
 		if (a > b)
 		{
-			int right_x = result[1].box.x + result[1].box.width/2, right_y = result[1].box.y + result[1].box.height/2;
+			int right_x = result[0].box.x + result[0].box.width/2, right_y = result[0].box.y + result[0].box.height/2;
 			sprintf(coord, "%d,%d,%d", right_x, right_y, flag_servo);
 		}
 		else
 		{
-			int right_x = result[0].box.x + result[0].box.width/2, right_y = result[0].box.y + result[0].box.height/2;
+			int right_x = result[1].box.x + result[1].box.width/2, right_y = result[1].box.y + result[1].box.height/2;
 			sprintf(coord, "%d,%d,%d", right_x, right_y, flag_servo);
 		}
 	}
@@ -336,4 +337,8 @@ void Yolo::findMax(vector<Output> result, int size)
 			sprintf(coord, "%d,%d,%d", right_x, right_y, flag_servo);
 		}
 	}
+	if (model_flag == 0)
+		strcpy(cir_coord, coord);
+	else
+		strcpy(H_coord, coord);
 }
