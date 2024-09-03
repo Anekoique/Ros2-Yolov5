@@ -240,15 +240,8 @@ Mat Yolo::drawPred(Mat src, vector<Output> result, vector<Scalar> color, int mod
 		int center_x = left[i] + (result[i].box.width / 2);
 		int center_y = top[i] + (result[i].box.height / 2);
 	}
+	getBox(result);
 	findMin(result, result.size(), model_flag);
-	//int left_x = left[left_max] + result[left_max].box.width/2, left_y = top[left_max] + result[left_max].box.height/2;
-	//int up_x = left[up_max] + result[up_max].box.width/2, up_y = top[up_max] + result[up_max].box.height/2;
-	//int down_x = left[down_max] + result[down_max].box.width/2, down_y = top[down_max] + result[down_max].box.height/2;
-
-	// cv::circle(src, cv::Point(left_x,left_y), 2, cv::Scalar(255,0,0), 3, cv::LINE_AA);// 蓝色
-	// cv::circle(src, cv::Point(right_x,right_y), 2, cv::Scalar(0,255,0), 3, cv::LINE_AA);// 绿色
-	// cv::circle(src, cv::Point(up_x,up_y), 2, cv::Scalar(0,0,255), 3, cv::LINE_AA);// 红色
-	// cv::circle(src, cv::Point(down_x,down_y), 2, cv::Scalar(0,255,255), 3, cv::LINE_AA);// 黄色
 	return src;
 }
 
@@ -341,4 +334,14 @@ void Yolo::findMin(vector<Output> result, int size, int model_flag)
 		strcpy(cir_coord, coord);
 	else
 		strcpy(H_coord, coord);
+}
+
+void Yolo::getBox(vector<Output> result) {
+	for (size_t i = 0; i < result.size(); i++) {
+		if (result[i].box.width > result[i].box.height)
+			result[i].box.height = result[i].box.width;
+		else 
+			result[i].box.width = result[i].box.height;
+
+	}
 }

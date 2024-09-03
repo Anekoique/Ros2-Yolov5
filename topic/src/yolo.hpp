@@ -30,7 +30,8 @@ public:
 	bool Detect(cv::Mat& SrcImg, cv::dnn::Net& net, std::vector<Output>& output, int model_flag);
 	cv::Mat drawPred(cv::Mat img, std::vector<Output> result, std::vector<cv::Scalar> color, int model_flag);
 	void target(cv::Mat src, std::vector<Output> result, int model_flag);
-	void findMax(std::vector<Output> result, int size, int model_flag);
+	void findMax(std::vector<Output> result, int model_flag);
+	void getBox(std::vector<Output> result);
 private:
 
 	float sigmoid_x(float x)

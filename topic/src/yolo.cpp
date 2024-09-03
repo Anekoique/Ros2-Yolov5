@@ -70,7 +70,7 @@ bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output, , int model_fla
 		int grid_x = (int)(netWidth / netStride[stride]);
 		int grid_y = (int)(netHeight / netStride[stride]);
 		for (int anchor = 0; anchor < 3; anchor++)
-		{ // anchors
+{ // anchors
 			const float anchor_w = netAnchors[stride][anchor * 2];
 			const float anchor_h = netAnchors[stride][anchor * 2 + 1];
 			for (int i = 0; i < grid_y; i++)
@@ -237,18 +237,9 @@ Mat Yolo::drawPred(Mat src, vector<Output> result, vector<Scalar> color, int mod
 		top[i] = max(top[i], labelSize.height);
 		putText(src, label, Point(left[i], top[i]), FONT_HERSHEY_SIMPLEX, 1, color[result[i].id], 2);
 
-		int center_x = left[i] + (result[i].box.width / 2);
-		int center_y = top[i] + (result[i].box.height / 2);
 	}
-	findMax(result, result.size(), model_flag);
-	//int left_x = left[left_max] + result[left_max].box.width/2, left_y = top[left_max] + result[left_max].box.height/2;
-	//int up_x = left[up_max] + result[up_max].box.width/2, up_y = top[up_max] + result[up_max].box.height/2;
-	//int down_x = left[down_max] + result[down_max].box.width/2, down_y = top[down_max] + result[down_max].box.height/2;
-
-	// cv::circle(src, cv::Point(left_x,left_y), 2, cv::Scalar(255,0,0), 3, cv::LINE_AA);// 蓝色
-	// cv::circle(src, cv::Point(right_x,right_y), 2, cv::Scalar(0,255,0), 3, cv::LINE_AA);// 绿色
-	// cv::circle(src, cv::Point(up_x,up_y), 2, cv::Scalar(0,0,255), 3, cv::LINE_AA);// 红色
-	// cv::circle(src, cv::Point(down_x,down_y), 2, cv::Scalar(0,255,255), 3, cv::LINE_AA);// 黄色
+	getBox(result);
+	findMax(result, model_flag);
 	return src;
 }
 
@@ -295,9 +286,10 @@ void Yolo::target(Mat src, vector<Output> result, int model_flag)
 	// return dst[0];
 }
 
-void Yolo::findMax(vector<Output> result, int size, int model_flag)
+void Yolo::findMax(vector<Output> result, int model_flag)
 {
 	char coord[50];
+	int size = result.size();
 	if (size == 0) return;
 	else if (size == 1)
 	{
@@ -341,4 +333,14 @@ void Yolo::findMax(vector<Output> result, int size, int model_flag)
 		strcpy(cir_coord, coord);
 	else
 		strcpy(H_coord, coord);
+}
+
+void Yolo::getBox(vector<Output> result) {
+	for (size_t i = 0; i < result.size(); i++) {
+		if (result[i].box.width > result[i].box.height)
+			result[i].box.height = result[i].box.width;
+		else 
+			result[i].box.width = result[i].box.height;
+
+	}
 }
